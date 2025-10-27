@@ -1,0 +1,81 @@
+@host = http://localhost:4004
+@service = /odata/v4/task
+
+###
+# ==============================================================================
+# User Requests
+# ==============================================================================
+###
+
+### Get all users
+# @name getAllUsers
+GET {{host}}{{service}}/Users
+
+###
+
+### Create a new user
+# @name createUser
+POST {{host}}/odata/v4/task/Users
+Content-Type: application/json
+
+{
+    "username": "demo",
+    "email": "demo@example.com"
+}
+
+###
+# Guarde o ID do utilizador criado para usar nos pedidos seguintes
+@userId = {{$last.response.body.ID}}
+
+### Get user by ID
+GET {{host}}{{service}}/Users({{userId}})
+
+###
+# ==============================================================================
+# Task Requests
+# ==============================================================================
+###
+
+### Get all tasks
+# @name getAllTasks
+GET {{host}}{{service}}/Tasks
+
+###
+
+### Create a new task assigned to the user created above
+# @name createTask
+POST {{host}}{{service}}/Tasks
+Content-Type: application/json
+
+{
+    "title": "Implementar nova funcionalidade",
+    "description": "A descrição detalhada da tarefa a ser feita.",
+    "priority": "High",
+    "dueDate": "2024-12-31",
+    "assignedTo_ID": "{{userId}}"
+}
+
+###
+# Guarde o ID da tarefa criada para usar nos pedidos seguintes
+@taskId = 0a976e89-c542-4cb3-aea8-55897bf3c436
+
+### Get task by ID
+GET {{host}}{{service}}/Tasks({{taskId}})
+
+###
+
+### Update a task to set its status to 'Done'
+# O serviço irá preencher automaticamente o campo 'completedAt'
+# @name updateTask
+PATCH {{host}}{{service}}/Tasks({{taskId}})
+Content-Type: application/json
+
+{
+    "status": "Done"
+}
+
+###
+
+### Delete a task
+# @name deleteTask
+DELETE {{host}}{{service}}/Tasks({{taskId}})
