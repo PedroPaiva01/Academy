@@ -1,6 +1,10 @@
-using smartsolutions from '/home/user/projects/Academy/db/data_model.cds';
+using smartsolutions as my from '../db/data_model';
 
 service TaskService {
-  entity Users as projection on smartsolutions.User;
-  entity Tasks as projection on smartsolutions.Task;
+    @odata.draft.enabled
+    entity Tasks as projection on my.Task;
+
+    @odata.draft.enabled
+    entity Users as projection on my.User;
+
 }

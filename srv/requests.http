@@ -19,8 +19,8 @@ POST {{host}}/odata/v4/task/Users
 Content-Type: application/json
 
 {
-    "username": "demo",
-    "email": "demo@example.com"
+    "username": "Pedro Paiva",
+    "email": "pedro.paiva@stratesys-ts.com"
 }
 
 ###
@@ -48,11 +48,12 @@ POST {{host}}{{service}}/Tasks
 Content-Type: application/json
 
 {
-    "title": "Implementar nova funcionalidade",
-    "description": "A descrição detalhada da tarefa a ser feita.",
+    "title": "Batatas 2000",
+    "description": "Cavar Batatas.",
+    "status": "Done",
     "priority": "High",
     "dueDate": "2024-12-31",
-    "assignedTo_ID": "{{userId}}"
+    "assignedTo_ID": "6fe7263f-6f86-4620-99c5-58bc312c886f"
 }
 
 ###
