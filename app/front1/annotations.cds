@@ -1,7 +1,7 @@
 using TaskService as service from '../../srv/task-service';
 
 annotate service.Tasks with @(
-    UI.LineItem        : [ 
+    UI.LineItem        : [
         {
             $Type: 'UI.DataField',
             Value: title,
@@ -35,21 +35,23 @@ annotate service.Tasks with @(
             ]}}
         },
         {
-            $Type: 'UI.DataField',
-            Value: priority,            
-            Label: '{i18n>Task.priority}',
+            $Type      : 'UI.DataField',
+            Value      : priority,
+            Label      : '{i18n>Task.priority}',
             Criticality: {$edmJson: {$If: [
                 {$Eq: [
                     {$Path: 'priority'},
                     'High'
                 ]},
-                'UI.CriticalityType/Negative', // Red for 'High'
-                'UI.CriticalityType/Neutral'  // Default for 'Medium' and 'Low'
+                'UI.CriticalityType/Negative',
+                // Red for 'High'
+                'UI.CriticalityType/Neutral' // Default for 'Medium' and 'Low'
             ]}}
         },
         {
             $Type: 'UI.DataField',
-            Value: assignedTo_ID,
+            Value: assignedTo.username,
+            Label: '{i18n>Task.assignedTo}'
         },
         {
             $Type: 'UI.DataField',
@@ -69,7 +71,7 @@ annotate service.Tasks with @(
         {Value: status},
         {Value: dueDate},
         {
-            Value: assignedTo_ID,
+            Value: assignedTo.username,
             Label: '{i18n>Task.assignedTo}'
         },
     ]}
