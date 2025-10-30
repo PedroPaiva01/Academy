@@ -3,7 +3,7 @@ using {TaskService} from './task-service';
 annotate TaskService.Tasks with @(UI: {
     Facets: [{
         $Type : 'UI.ReferenceFacet',
-        Label : '{i18n>Task.details}',
+        Label : '{i18n>Task.title}',
         Target: '@UI.FieldGroup#Details'
     }],
     FieldGroup #Details: {

@@ -1,53 +1,63 @@
 using TaskService as service from '../../srv/task-service';
 
 annotate service.Tasks with @(
-    UI.LineItem : [
+    UI.LineItem        : [ 
         {
-            $Type : 'UI.DataField',
-            Value : title,
-            Label : '{i18n>Task.title}',
+            $Type: 'UI.DataField',
+            Value: title,
+            Label: '{i18n>Task.title}',
         },
         {
-            $Type : 'UI.DataField',
-            Value : description,
-            Label : '{i18n>Task.description}',
+            $Type: 'UI.DataField',
+            Value: description,
+            Label: '{i18n>Task.description}',
         },
         {
-            $Type : 'UI.DataField',
-            Value : status,
-            Label : '{i18n>Task.status}',
-            Criticality : {$edmJson: {$If: [
+            $Type      : 'UI.DataField',
+            Value      : status,
+            Label      : '{i18n>Task.status}',
+            Criticality: {$edmJson: {$If: [
                 {$Eq: [
                     {$Path: 'status'},
                     'New'
                 ]},
-                'UI.CriticalityType/Negative', // Red for 'New'
+                'UI.CriticalityType/Negative',
+                // Red for 'New'
                 {$If: [
                     {$Eq: [
                         {$Path: 'status'},
                         'InProgress'
                     ]},
-                    'UI.CriticalityType/Critical', // Orange for 'InProgress'
-                    'UI.CriticalityType/Positive'  // Green for 'Done'
+                    'UI.CriticalityType/Critical',
+                    // Orange for 'InProgress'
+                    'UI.CriticalityType/Positive' // Green for 'Done'
                 ]}
             ]}}
         },
         {
-            $Type : 'UI.DataField',
-            Value : priority,
-            Label : '{i18n>Task.priority}',
+            $Type: 'UI.DataField',
+            Value: priority,            
+            Label: '{i18n>Task.priority}',
+            Criticality: {$edmJson: {$If: [
+                {$Eq: [
+                    {$Path: 'priority'},
+                    'High'
+                ]},
+                'UI.CriticalityType/Negative', // Red for 'High'
+                'UI.CriticalityType/Neutral'  // Default for 'Medium' and 'Low'
+            ]}}
         },
         {
-            $Type : 'UI.DataField',
-            Value : assignedTo_ID,
+            $Type: 'UI.DataField',
+            Value: assignedTo_ID,
         },
         {
-            $Type : 'UI.DataField',
-            Value : dueDate,
-            Label : '{i18n>Task.dueDate}',
+            $Type: 'UI.DataField',
+            Value: dueDate,
+            Label: '{i18n>Task.dueDate}'
         },
     ],
-    Facets         : [{
+    Facets             : [{
         $Type : 'UI.ReferenceFacet',
         Label : '{i18n>Task.details}',
         Target: '@UI.FieldGroup#Details'
@@ -66,20 +76,33 @@ annotate service.Tasks with @(
 );
 
 annotate service.Tasks with {
-    assignedTo @(
-        Common.ValueList : {
-            $Type : 'Common.ValueListType',
-            CollectionPath : 'Users',
-            Parameters : [
-                {
-                    $Type : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : assignedTo_ID,
-                    ValueListProperty : 'ID',
-                },
-                {
-                    $Type : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'username',
-                },
-            ],
-        },
-)};
+    assignedTo @(Common.ValueList: {
+        $Type         : 'Common.ValueListType',
+        CollectionPath: 'Users',
+        Parameters    : [
+            {
+                $Type            : 'Common.ValueListParameterInOut',
+                LocalDataProperty: assignedTo_ID,
+                ValueListProperty: 'ID',
+            },
+            {
+                $Type            : 'Common.ValueListParameterDisplayOnly',
+                ValueListProperty: 'username',
+            },
+        ],
+    }, )
+};
+
+annotate service.Users with @(UI.HeaderInfo: {
+    Title         : {
+        $Type: 'UI.DataField',
+        Value: username,
+    },
+    Description   : {
+        $Type: 'UI.DataField',
+        Value: email,
+    },
+
+    TypeName      : '',
+    TypeNamePlural: '',
+});

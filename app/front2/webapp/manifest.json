@@ -1,7 +1,7 @@
 {
   "_version": "1.73.1",
   "sap.app": {
-    "id": "front1",
+    "id": "front2",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -13,7 +13,7 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:lrop",
       "version": "1.19.3",
-      "toolsId": "b533311a-18a9-4504-b630-753659a23180"
+      "toolsId": "d593439a-1844-44cd-ab8a-c1e67b609a8d"
     },
     "dataSources": {
       "mainService": {
@@ -60,7 +60,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "front1.i18n.i18n"
+          "bundleName": "front2.i18n.i18n"
         }
       },
       "": {
@@ -85,26 +85,26 @@
       "routes": [
         {
           "pattern": ":?query:",
-          "name": "UsersList",
-          "target": "UsersList"
+          "name": "TasksList",
+          "target": "TasksList"
         },
         {
-          "pattern": "Users({key}):?query:",
-          "name": "UsersObjectPage",
-          "target": "UsersObjectPage"
+          "pattern": "Tasks({key}):?query:",
+          "name": "TasksObjectPage",
+          "target": "TasksObjectPage"
         }
       ],
       "targets": {
-        "UsersList": {
+        "TasksList": {
           "type": "Component",
-          "id": "UsersList",
+          "id": "TasksList",
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "contextPath": "/Users",
+              "contextPath": "/Tasks",
               "variantManagement": "Page",
               "navigation": {
-                "tasks": {
+                "Tasks": {
                   "detail": {
                     "route": "TasksObjectPage"
                   }
@@ -117,17 +117,6 @@
                   }
                 }
               }
-            }
-          }
-        },
-        "UsersObjectPage": {
-          "type": "Component",
-          "id": "UsersObjectPage",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "editableHeaderContent": false,
-              "contextPath": "/Users"
             }
           }
         },
