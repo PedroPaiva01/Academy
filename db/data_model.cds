@@ -14,21 +14,21 @@ entity User : cuid, managed {
 
 entity Task {
   key ID          : UUID;
-      title       : String(100)         @title: '{i18n>Task.title}';
-      description : String(500)         @title: '{i18n>Task.description}';
-      priority    : String              @title: '{i18n>Task.priority}' enum {
-        Low                             @title: '{i18n>Task.low}';
-        Medium                          @title: '{i18n>Task.medium}';
-        High                            @title: '{i18n>Task.high}'
+      title       : String(100)          @title: '{i18n>Task.title}'       @mandatory;
+      description : String(500)          @title: '{i18n>Task.description}';
+      priority    : String               @title: '{i18n>Task.priority}'    @mandatory  enum {
+        Low                              @title: '{i18n>Task.low}';
+        Medium                           @title: '{i18n>Task.medium}';
+        High                             @title: '{i18n>Task.high}'
       };
-      status      : String              @title: '{i18n>Task.status}' enum {
-        New                             @title: '{i18n>Task.new}';
-        InProgress                      @title: '{i18n>Task.inProgress}';
-        Done                            @title: '{i18n>Task.done}'
+      status      : String               @title: '{i18n>Task.status}'      @mandatory  enum {
+        New                              @title: '{i18n>Task.new}';
+        InProgress                       @title: '{i18n>Task.inProgress}';
+        Done                             @title: '{i18n>Task.done}'
       };
-      dueDate     : Date                @title: '{i18n>Task.dueDate}';
-      createdAt   : DateTime            @title: '{i18n>Task.createdAt}';
-      updatedAt   : DateTime            @title: '{i18n>Task.updatedAt}';
-      completedAt : DateTime            @title: '{i18n>Task.completedAt}';
-      assignedTo  : Association to User @title: '{i18n>Task.assignedTo}';
+      dueDate     : Date                 @title: '{i18n>Task.dueDate}'     @mandatory;
+      createdAt   : DateTime             @title: '{i18n>Task.createdAt}';
+      updatedAt   : DateTime             @title: '{i18n>Task.updatedAt}';
+      completedAt : DateTime             @title: '{i18n>Task.completedAt}';
+      assignedTo  : Association to User  @title: '{i18n>Task.assignedTo}'  @mandatory;
 }
